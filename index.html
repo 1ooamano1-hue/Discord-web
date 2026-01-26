@@ -89,20 +89,27 @@
             margin: 0 auto;
         }
 
-        /* ステッキーバナー (900x250) */
+        /* ステッキーバナー (900x250) - 枠線と背景を削除 */
         .sticky-footer-ad {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             height: 250px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent; /* 背景透明 */
+            backdrop-filter: none; /* ぼかしなし */
+            border-top: none; /* 枠線なし */
             z-index: 100;
             display: flex;
             justify-content: center;
             align-items: center;
+            pointer-events: none; /* バナー背景部分のクリックを背後に通す */
+        }
+        
+        .sticky-footer-ad ins, 
+        .sticky-footer-ad script,
+        .sticky-footer-ad iframe {
+            pointer-events: auto; /* 広告本体はクリック可能にする */
         }
     </style>
 </head>
@@ -208,7 +215,7 @@
             </main>
         </div>
 
-        <!-- 追加された下部広告エリア -->
+        <!-- 下部広告エリア -->
         <div class="mt-12 ad-container">
             <ins class="eas6a97888e31" data-zoneid="5839408"></ins>
             <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
@@ -221,7 +228,7 @@
         </footer>
     </div>
 
-    <!-- Sticky Footer Ad (900x250) -->
+    <!-- Sticky Footer Ad (900x250) - 枠・背景なし -->
     <div class="sticky-footer-ad">
         <ins class="eas6a97888e17" data-zoneid="5839404"></ins>
         <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
