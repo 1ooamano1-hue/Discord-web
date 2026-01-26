@@ -8,11 +8,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Noto+Sans+JP:wght@500;900&display=swap" rel="stylesheet">
+    
+    <!-- 広告プロバイダースクリプト -->
+    <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script>
+    <script async type="application/javascript" src="https://a.pemsrv.com/ad-provider.js"></script>
+
     <style>
         :root {
             --accent: #5865F2;
             --bg: #050508;
-            /* カードの背景を少し濃くして視認性を確保 */
             --card-bg: rgba(20, 20, 25, 0.85);
             --neon-glow: 0 0 30px rgba(88, 101, 242, 0.4);
         }
@@ -22,6 +26,8 @@
             color: #ffffff;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            /* ステッキーバナー分の余白を確保 */
+            padding-bottom: 270px;
         }
         .main-gradient {
             background: linear-gradient(135deg, #5865F2 0%, #a855f7 100%);
@@ -38,7 +44,6 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             border-left: 5px solid transparent;
-            /* 文字の視認性を上げるためのシャドウ */
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
         .premium-card:hover {
@@ -67,19 +72,45 @@
         }
         .hidden-important { display: none !important; }
         
-        /* 入力フォームの視認性向上 */
         input::placeholder {
             color: rgba(255, 255, 255, 0.3);
         }
 
-        /* バリデーションエラー時のスタイル */
         .input-error {
             border-color: #ef4444 !important;
             background-color: rgba(239, 68, 68, 0.05) !important;
         }
+
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        /* ステッキーバナー (900x250) */
+        .sticky-footer-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body class="min-h-screen">
+    <!-- Desktop Fullpage Interstitial Ad -->
+    <ins class="eas6a97888e35" data-zoneid="5839402"></ins>
+    <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+
     <div class="orb main-gradient top-[-20%] left-[-10%]"></div>
     <div class="orb bg-indigo-900 bottom-[-20%] right-[-10%]" style="animation-delay: -6s;"></div>
 
@@ -101,7 +132,6 @@
                         <div class="text-lg leading-none">ウェブ版を開く</div>
                     </div>
                 </a>
-                <!-- 一括起動用ボタン -->
                 <button id="main-action-wrapper" onclick="handleMainAction()" class="flex-1 flex items-center justify-center gap-4 main-gradient px-10 py-5 rounded-3xl font-black shadow-2xl transition-all hover:scale-[1.02] active:scale-95 group hidden-important">
                     <span class="text-2xl group-hover:rotate-12 transition-transform">🚀</span>
                     <div class="text-left">
@@ -135,6 +165,12 @@
                         <div class="font-bold text-sm">サポート</div>
                     </a>
                 </nav>
+
+                <!-- 300x250 Banner Ad Area -->
+                <div class="glass rounded-[2rem] p-4 ad-container min-h-[250px] border border-white/5">
+                    <ins class="eas6a97888e2" data-zoneid="5839396"></ins>
+                    <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+                </div>
 
                 <div class="glass rounded-[2rem] p-8 space-y-6 border border-white/5">
                     <h4 class="text-lg font-black text-[#5865F2] flex items-center gap-2"><span>💡</span> Tips</h4>
@@ -172,11 +208,23 @@
             </main>
         </div>
 
-        <footer class="mt-16 py-10 border-t border-white/5 text-center">
+        <!-- 追加された下部広告エリア -->
+        <div class="mt-12 ad-container">
+            <ins class="eas6a97888e31" data-zoneid="5839408"></ins>
+            <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+        </div>
+
+        <footer class="mt-8 py-10 border-t border-white/5 text-center">
             <p class="text-[10px] text-gray-500 tracking-wider font-bold">
                 &copy; 2026 DISCOWEB PREMIUM - PERSISTENT LOCAL STORAGE ENABLED
             </p>
         </footer>
+    </div>
+
+    <!-- Sticky Footer Ad (900x250) -->
+    <div class="sticky-footer-ad">
+        <ins class="eas6a97888e17" data-zoneid="5839404"></ins>
+        <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
     </div>
 
     <!-- Modal -->
@@ -203,7 +251,6 @@
     </div>
 
     <script>
-        // ストレージキー（バージョンを上げて確実に保存を上書き）
         const STORAGE_KEY = 'discoweb_v6_premium_data';
         let myUrls = [];
 
@@ -211,7 +258,6 @@
             try {
                 const data = localStorage.getItem(STORAGE_KEY);
                 myUrls = data ? JSON.parse(data) : [];
-                console.log("Data Loaded:", myUrls.length, "items");
             } catch (e) {
                 console.error("Data load failed", e);
                 myUrls = [];
@@ -222,7 +268,6 @@
         function saveData() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(myUrls));
-                console.log("Data Saved Successfully");
                 updateUI();
             } catch (e) {
                 console.error("Data save failed", e);
@@ -266,7 +311,6 @@
             
             let hasError = false;
 
-            // 名前チェック
             if (!name) {
                 nameEl.classList.add('input-error');
                 hasError = true;
@@ -274,7 +318,6 @@
                 nameEl.classList.remove('input-error');
             }
 
-            // URLチェック (リンク以外をはじく)
             if (!url || !isValidURL(url)) {
                 urlEl.classList.add('input-error');
                 errMsg.classList.remove('opacity-0');
@@ -329,13 +372,11 @@
                     <div class="group relative glass p-6 rounded-[2rem] premium-card flex flex-col justify-between">
                         <div class="flex items-start justify-between mb-4">
                             <div class="flex-1 min-w-0">
-                                <!-- 名前をより太く、影を強調 -->
                                 <h4 class="text-xl md:text-2xl font-black text-white group-hover:text-[#5865F2] transition-colors truncate drop-shadow-md">
                                     ${item.name}
                                 </h4>
                                 <div class="flex items-center mt-2">
                                     <div class="w-2 h-2 rounded-full bg-emerald-500 mr-2 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
-                                    <!-- URLの色を明るくし、視認性を向上 -->
                                     <span class="text-[10px] text-indigo-200 font-bold tracking-widest uppercase opacity-80 truncate max-w-[80%] block">
                                         LINK ACTIVE
                                     </span>
@@ -359,7 +400,6 @@
             }
         }
 
-        // Mouse motion effect
         if (window.innerWidth > 1024) {
             document.addEventListener('mousemove', (e) => {
                 const x = (e.clientX / window.innerWidth - 0.5) * 30;
@@ -371,7 +411,6 @@
             });
         }
 
-        // Initial Load
         window.onload = loadData;
     </script>
 </body>
