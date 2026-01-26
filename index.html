@@ -3,13 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ディスコウェブ - Discord web | Premium Dashboard(ディスコード)</title>
+    <title>ディスコウェブ | Discoweb Premium Dashboard</title>
+    
+    <!-- SEO & Metadata -->
+    <meta name="description" content="Manage your Discord web channels efficiently. Multi-launch, easy access, and personalized dashboard for power users.">
+    <meta name="keywords" content="Discord, Web, Dashboard, Multi-launch, Productivity, ディスコード, ウェブ版, 一括起動">
+    <meta name="author" content="Discoweb Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:id" content="discoweb-premium">
+    <meta id="og-title" property="og:title" content="ディスコウェブ | Premium Dashboard">
+    <meta id="og-desc" property="og:description" content="Discordのウェブ版をより便利に。一括起動やリンク保存が可能なプレミアムダッシュボード。">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Noto+Sans+JP:wght@500;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Noto+Sans+JP:wght@500;900&family=Noto+Sans+SC:wght@500;900&display=swap" rel="stylesheet">
     
-    <!-- 広告プロバイダースクリプト -->
+    <!-- Ad Scripts -->
     <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script>
     <script async type="application/javascript" src="https://a.pemsrv.com/ad-provider.js"></script>
 
@@ -21,12 +33,11 @@
             --neon-glow: 0 0 30px rgba(88, 101, 242, 0.4);
         }
         body {
-            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-family: 'Outfit', 'Noto Sans JP', 'Noto Sans SC', sans-serif;
             background-color: var(--bg);
             color: #ffffff;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
-            /* ステッキーバナー削除に伴い余白を通常に戻す */
             padding-bottom: 40px;
         }
         .main-gradient {
@@ -41,7 +52,6 @@
         }
         .premium-card {
             position: relative;
-            overflow: hidden;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             border-left: 5px solid transparent;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -67,20 +77,11 @@
             0% { transform: scale(1); opacity: 0.1; }
             100% { transform: scale(1.15); opacity: 0.2; }
         }
-        @media (max-width: 640px) {
-            .text-responsive-title { font-size: 2.75rem !important; }
-        }
         .hidden-important { display: none !important; }
-        
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
         .input-error {
             border-color: #ef4444 !important;
             background-color: rgba(239, 68, 68, 0.05) !important;
         }
-
         .ad-container {
             display: flex;
             justify-content: center;
@@ -88,39 +89,64 @@
             overflow: hidden;
             margin: 0 auto;
         }
+        .lang-btn {
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 900;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
+            color: rgba(255,255,255,0.5);
+        }
+        .lang-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
+        }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Desktop Fullpage Interstitial Ad -->
+    <!-- Interstitial Ad (Page Load) -->
     <ins class="eas6a97888e35" data-zoneid="5839402"></ins>
     <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
 
     <div class="orb main-gradient top-[-20%] left-[-10%]"></div>
     <div class="orb bg-indigo-900 bottom-[-20%] right-[-10%]" style="animation-delay: -6s;"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 md:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 md:py-8">
+        
+        <!-- Language Switcher Bar -->
+        <div class="flex justify-end gap-2 mb-6">
+            <button onclick="setLanguage('ja')" id="lang-ja" class="lang-btn">日本語</button>
+            <button onclick="setLanguage('en')" id="lang-en" class="lang-btn">EN</button>
+            <button onclick="setLanguage('zh')" id="lang-zh" class="lang-btn">中文</button>
+            <button onclick="setLanguage('es')" id="lang-es" class="lang-btn">ES</button>
+        </div>
+
         <!-- Header -->
         <header class="glass rounded-[2.5rem] p-6 md:p-10 mb-8 flex flex-col lg:flex-row items-center justify-between gap-8 border-t border-white/10">
             <div class="text-center lg:text-left">
-                <span class="inline-block px-4 py-1 rounded-full bg-[#5865F2]/20 text-[#5865F2] text-[10px] font-black tracking-[0.3em] mb-3">PREMIUM DASHBOARD</span>
-                <h1 class="text-responsive-title text-5xl md:text-7xl font-black tracking-tighter leading-none">
-                    ディスコ<span class="text-[#5865F2]">ウェブ</span>
+                <span id="t-premium" class="inline-block px-4 py-1 rounded-full bg-[#5865F2]/20 text-[#5865F2] text-[10px] font-black tracking-[0.3em] mb-3 uppercase">PREMIUM DASHBOARD</span>
+                <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-none">
+                    <span id="t-brand-1">ディスコ</span><span id="t-brand-2" class="text-[#5865F2]">ウェブ</span>
                 </h1>
             </div>
             
             <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-4">
-                <a href="https://discord.com/app" target="_self" class="flex-1 flex items-center justify-center gap-4 bg-white/5 hover:bg-white/10 px-8 py-5 rounded-3xl border border-white/10 transition-all font-bold group">
+                <a href="https://discord.com/app" target="_self" class="flex-1 flex items-center justify-center gap-4 bg-white/5 hover:bg-white/10 px-8 py-5 rounded-3xl border border-white/10 transition-all font-bold group text-center">
                     <span class="text-2xl group-hover:scale-110 transition-transform">🌐</span>
                     <div class="text-left">
                         <div class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Official</div>
-                        <div class="text-lg leading-none">ウェブ版を開く</div>
+                        <div id="t-open-web" class="text-lg leading-none">ウェブ版を開く</div>
                     </div>
                 </a>
                 <button id="main-action-wrapper" onclick="handleMainAction()" class="flex-1 flex items-center justify-center gap-4 main-gradient px-10 py-5 rounded-3xl font-black shadow-2xl transition-all hover:scale-[1.02] active:scale-95 group hidden-important">
                     <span class="text-2xl group-hover:rotate-12 transition-transform">🚀</span>
                     <div class="text-left">
-                        <div id="main-action-sub" class="text-[10px] text-white/70 font-black uppercase tracking-widest">Multi-Launch</div>
-                        <div class="text-lg leading-none">ウェブ版一括起動</div>
+                        <div id="t-multi-sub" class="text-[10px] text-white/70 font-black uppercase tracking-widest">Multi-Launch</div>
+                        <div id="t-multi-btn" class="text-lg leading-none">一括起動</div>
                     </div>
                 </button>
             </div>
@@ -129,71 +155,66 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <!-- Left Sidebar -->
             <aside class="lg:col-span-4 xl:col-span-3 space-y-6">
-                <nav class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
+                <nav class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3 text-center lg:text-left">
                     <a href="https://disboard.org/ja" target="_blank" class="glass p-5 rounded-2xl flex items-center premium-card border-none">
                         <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mr-4 text-amber-500 border border-amber-500/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </div>
-                        <div class="font-bold text-sm">DISBOARD</div>
+                        <div class="font-bold text-sm uppercase">Disboard</div>
                     </a>
                     <a href="https://discordstatus.com/" target="_blank" class="glass p-5 rounded-2xl flex items-center premium-card border-none">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mr-4 text-emerald-500 border border-emerald-500/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
-                        <div class="font-bold text-sm">稼働状況</div>
+                        <div id="t-status" class="font-bold text-sm">稼働状況</div>
                     </a>
                     <a href="https://support.discord.com/" target="_blank" class="glass p-5 rounded-2xl flex items-center premium-card border-none">
                         <div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center mr-4 text-sky-500 border border-sky-500/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
-                        <div class="font-bold text-sm">サポート</div>
+                        <div id="t-support" class="font-bold text-sm">サポート</div>
                     </a>
                 </nav>
 
-                <!-- 300x250 Banner Ad Area -->
-                <div class="glass rounded-[2rem] p-4 ad-container min-h-[250px] border border-white/5">
+                <!-- Sidebar Banner Ad Area -->
+                <div class="glass rounded-[2rem] p-4 ad-container min-h-[250px] border border-white/5 overflow-hidden">
                     <ins class="eas6a97888e2" data-zoneid="5839396"></ins>
                     <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
                 </div>
 
-                <div class="glass rounded-[2rem] p-8 space-y-6 border border-white/5">
-                    <h4 class="text-lg font-black text-[#5865F2] flex items-center gap-2"><span>💡</span> Tips</h4>
-                    <div class="space-y-4 text-xs text-gray-300 font-medium leading-relaxed">
-                        <p><strong class="text-white">追加:</strong> 「リンクをコピー」して下のボタンから保存。</p>
-                        <p><strong class="text-white">一括:</strong> 右上のボタンで全タブを同時に展開。</p>
-                        <p><strong class="text-white">移動:</strong> 名前をタップでこの画面を閉じて移動。</p>
+                <div class="glass rounded-[2rem] p-8 space-y-4 border border-white/5">
+                    <h4 class="text-lg font-black text-[#5865F2] flex items-center gap-2"><span>💡</span> <span id="t-tips-title">Tips</span></h4>
+                    <div id="t-tips-content" class="space-y-4 text-xs text-gray-300 font-medium leading-relaxed">
+                        <!-- Translatable content -->
                     </div>
                 </div>
             </aside>
 
-            <!-- Main Content -->
+            <!-- Main Content Area -->
             <main class="lg:col-span-8 xl:col-span-9">
                 <div class="glass rounded-[3rem] p-6 md:p-10 min-h-[600px] flex flex-col border border-white/10">
-                    <div class="flex flex-col sm:flex-row items-center justify-between mb-10 gap-6">
-                        <div class="text-center sm:text-left">
-                            <h2 class="text-3xl font-black">マイ・リスト</h2>
-                            <p class="text-[10px] text-[#5865F2] font-black tracking-[0.2em] mt-1">YOUR SAVED CHANNELS</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-between mb-10 gap-6 text-center sm:text-left">
+                        <div>
+                            <h2 id="t-mylist" class="text-3xl font-black">マイ・リスト</h2>
+                            <p id="t-mylist-sub" class="text-[10px] text-[#5865F2] font-black tracking-[0.2em] mt-1 uppercase">YOUR SAVED CHANNELS</p>
                         </div>
-                        <button onclick="toggleModal(true)" class="w-full sm:w-auto bg-white text-black px-10 py-4 rounded-2xl font-black text-lg transition-all hover:bg-[#5865F2] hover:text-white shadow-xl active:scale-95">
+                        <button onclick="toggleModal(true)" id="t-add-btn" class="w-full sm:w-auto bg-white text-black px-10 py-4 rounded-2xl font-black text-lg transition-all hover:bg-[#5865F2] hover:text-white shadow-xl active:scale-95">
                             ＋ リンクを追加
                         </button>
                     </div>
                     
-                    <div id="url-list" class="grid grid-cols-1 xl:grid-cols-2 gap-5">
-                        <!-- List Items -->
-                    </div>
+                    <div id="url-list" class="grid grid-cols-1 xl:grid-cols-2 gap-5"></div>
 
                     <div id="empty-state" class="hidden flex-1 flex flex-col items-center justify-center py-20 bg-white/[0.02] rounded-[2.5rem] border-2 border-dashed border-white/5 text-center px-6">
                         <div class="text-5xl mb-6 opacity-30">📁</div>
-                        <h3 class="text-lg font-bold text-gray-400">リストは空です</h3>
-                        <p class="text-xs text-gray-600 mt-2">よく使うリンクを追加して始めましょう</p>
+                        <h3 id="t-empty-msg" class="text-lg font-bold text-gray-400">リストは空です</h3>
                     </div>
                 </div>
             </main>
         </div>
 
-        <!-- 下部広告エリア -->
-        <div class="mt-12 ad-container">
+        <!-- Horizontal Ad Area (Bottom) -->
+        <div class="mt-12 ad-container glass rounded-[2rem] p-4 border border-white/5 min-h-[90px]">
             <ins class="eas6a97888e31" data-zoneid="5839408"></ins>
             <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
         </div>
@@ -209,20 +230,20 @@
     <div id="add-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
         <div class="absolute inset-0 bg-black/85 backdrop-blur-xl" onclick="toggleModal(false)"></div>
         <div class="glass relative w-full max-w-lg p-8 md:p-10 rounded-[3rem] border border-white/20 animate-in zoom-in-95 duration-200">
-            <h3 class="text-2xl font-black mb-8">リンクの追加</h3>
+            <h3 id="t-modal-title" class="text-2xl font-black mb-8">リンクの追加</h3>
             <div class="space-y-5">
                 <div class="space-y-2">
-                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2">表示名</label>
-                    <input type="text" id="new-name" placeholder="友達のDM / サーバー名" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#5865F2] transition-all font-bold text-white">
+                    <label id="t-label-name" class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2">表示名</label>
+                    <input type="text" id="new-name" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#5865F2] transition-all font-bold text-white">
                 </div>
                 <div class="space-y-2">
-                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2">URL (httpから始まるリンクのみ)</label>
-                    <input type="text" id="new-url" placeholder="https://discord.com/channels/..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#5865F2] transition-all font-mono text-xs text-indigo-300">
-                    <p id="url-error-msg" class="text-[10px] text-red-500 font-bold ml-2 opacity-0 transition-opacity">正しいURLを入力してください</p>
+                    <label id="t-label-url" class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2">URL (httpsのみ)</label>
+                    <input type="text" id="new-url" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#5865F2] transition-all font-mono text-xs text-indigo-300">
+                    <p id="t-error-msg" class="text-[10px] text-red-500 font-bold ml-2 opacity-0 transition-opacity">正しいURLを入力してください</p>
                 </div>
                 <div class="pt-6 flex gap-3">
-                    <button onclick="toggleModal(false)" class="flex-1 py-4 rounded-2xl font-bold bg-white/5 hover:bg-white/10 transition-all">戻る</button>
-                    <button onclick="confirmAdd()" class="flex-[2] py-4 rounded-2xl font-black main-gradient text-white shadow-xl hover:scale-[1.02] active:scale-95 transition-all">保存して追加</button>
+                    <button onclick="toggleModal(false)" id="t-cancel" class="flex-1 py-4 rounded-2xl font-bold bg-white/5 hover:bg-white/10 transition-all">戻る</button>
+                    <button onclick="confirmAdd()" id="t-save" class="flex-[2] py-4 rounded-2xl font-black main-gradient text-white shadow-xl hover:scale-[1.02] active:scale-95 transition-all">保存</button>
                 </div>
             </div>
         </div>
@@ -230,83 +251,160 @@
 
     <script>
         const STORAGE_KEY = 'discoweb_v6_premium_data';
+        const LANG_KEY = 'discoweb_lang';
         let myUrls = [];
+        let currentLang = 'ja';
+
+        const i18n = {
+            ja: {
+                brand1: "ディスコ", brand2: "ウェブ",
+                premium: "プレミアム・ダッシュボード",
+                openWeb: "ウェブ版を開く",
+                multiBtn: "一括起動",
+                status: "稼働状況", support: "サポート",
+                mylist: "マイ・リスト", mylistSub: "保存したチャンネル",
+                addBtn: "＋ リンクを追加", empty: "リストは空です",
+                modalTitle: "リンクの追加", labelName: "表示名", labelUrl: "URL (httpsのみ)",
+                error: "正しいURLを入力してください", cancel: "戻る", save: "保存して追加",
+                moveNow: "今すぐ移動", newTab: "別タブ",
+                ogDesc: "Discordのウェブ版をより便利に。一括起動やリンク保存が可能なプレミアムダッシュボード。",
+                tips: [
+                    "<strong class='text-white'>追加:</strong> 「リンクをコピー」して保存。",
+                    "<strong class='text-white'>一括:</strong> 全タブを同時に展開。",
+                    "<strong class='text-white'>移動:</strong> タップで瞬時にアクセス。"
+                ]
+            },
+            en: {
+                brand1: "Disco", brand2: "Web",
+                premium: "PREMIUM DASHBOARD",
+                openWeb: "Open Web Version",
+                multiBtn: "Launch All",
+                status: "Server Status", support: "Support",
+                mylist: "My List", mylistSub: "SAVED CHANNELS",
+                addBtn: "+ Add Link", empty: "Your list is empty",
+                modalTitle: "Add New Link", labelName: "Display Name", labelUrl: "URL (https only)",
+                error: "Please enter a valid URL", cancel: "Cancel", save: "Save Link",
+                moveNow: "Go Now", newTab: "Tab",
+                ogDesc: "Efficiently manage Discord on the web. Save links and launch all at once with this premium dashboard.",
+                tips: [
+                    "<strong class='text-white'>Add:</strong> Paste your Discord URL and save.",
+                    "<strong class='text-white'>Multi:</strong> Launch all tabs at once.",
+                    "<strong class='text-white'>Access:</strong> Click cards to jump directly."
+                ]
+            },
+            zh: {
+                brand1: "迪斯科", brand2: "网页",
+                premium: "高级仪表板",
+                openWeb: "打开网页版",
+                multiBtn: "全部启动",
+                status: "服务状态", support: "支持",
+                mylist: "我的列表", mylistSub: "已保存的频道",
+                addBtn: "+ 添加链接", empty: "列表为空",
+                modalTitle: "添加新链接", labelName: "显示名称", labelUrl: "URL (仅限https)",
+                error: "请输入有效的URL", cancel: "取消", save: "保存链接",
+                moveNow: "立即前往", newTab: "新标签",
+                ogDesc: "高效管理Discord网页版。保存频道链接并实现一括启动的高级工具。",
+                tips: [
+                    "<strong class='text-white'>添加:</strong> 复制链接并点击添加。",
+                    "<strong class='text-white'>批量:</strong> 一次打开所有标签。",
+                    "<strong class='text-white'>导航:</strong> 点击卡片快速访问。"
+                ]
+            },
+            es: {
+                brand1: "Disco", brand2: "Web",
+                premium: "PANEL PREMIUM",
+                openWeb: "Abrir Versión Web",
+                multiBtn: "Lanzar Todo",
+                status: "Estado", support: "Soporte",
+                mylist: "Mi Lista", mylistSub: "CANALES GUARDADOS",
+                addBtn: "+ Añadir Link", empty: "Tu lista está vacía",
+                modalTitle: "Añadir Nuevo Link", labelName: "Nombre", labelUrl: "URL (solo https)",
+                error: "Por favor ingrese una URL válida", cancel: "Volver", save: "Guardar",
+                moveNow: "Ir Ahora", newTab: "Pestaña",
+                ogDesc: "Gestiona Discord en la web de forma eficiente. Guarda tus canales y lánzalos todos a la vez.",
+                tips: [
+                    "<strong class='text-white'>Añadir:</strong> Pega el link y guarda.",
+                    "<strong class='text-white'>Multi:</strong> Abre todas las pestañas.",
+                    "<strong class='text-white'>Mover:</strong> Toca para acceder rápido."
+                ]
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem(LANG_KEY, lang);
+            
+            const t = i18n[lang] || i18n.en;
+            
+            // Dynamic Meta Update for SEO
+            document.title = `${t.brand1}${t.brand2} | Premium Dashboard`;
+            document.getElementById('og-title').setAttribute('content', document.title);
+            document.getElementById('og-desc').setAttribute('content', t.ogDesc);
+
+            // Element Updates
+            document.getElementById('t-brand-1').innerText = t.brand1;
+            document.getElementById('t-brand-2').innerText = t.brand2;
+            document.getElementById('t-premium').innerText = t.premium;
+            document.getElementById('t-open-web').innerText = t.openWeb;
+            document.getElementById('t-multi-btn').innerText = t.multiBtn;
+            document.getElementById('t-status').innerText = t.status;
+            document.getElementById('t-support').innerText = t.support;
+            document.getElementById('t-mylist').innerText = t.mylist;
+            document.getElementById('t-mylist-sub').innerText = t.mylistSub;
+            document.getElementById('t-add-btn').innerText = t.addBtn;
+            document.getElementById('t-empty-msg').innerText = t.empty;
+            document.getElementById('t-modal-title').innerText = t.modalTitle;
+            document.getElementById('t-label-name').innerText = t.labelName;
+            document.getElementById('t-label-url').innerText = t.labelUrl;
+            document.getElementById('t-error-msg').innerText = t.error;
+            document.getElementById('t-cancel').innerText = t.cancel;
+            document.getElementById('t-save').innerText = t.save;
+            document.getElementById('t-tips-content').innerHTML = t.tips.map(p => `<p>${p}</p>`).join('');
+
+            // Active Switcher UI
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}`).classList.add('active');
+
+            updateUI();
+        }
 
         function loadData() {
             try {
+                const savedLang = localStorage.getItem(LANG_KEY);
+                const browserLang = navigator.language.split('-')[0];
+                const initialLang = savedLang || (i18n[browserLang] ? browserLang : 'ja');
+                setLanguage(initialLang);
+
                 const data = localStorage.getItem(STORAGE_KEY);
                 myUrls = data ? JSON.parse(data) : [];
             } catch (e) {
-                console.error("Data load failed", e);
                 myUrls = [];
             }
             updateUI();
         }
 
         function saveData() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(myUrls));
-                updateUI();
-            } catch (e) {
-                console.error("Data save failed", e);
-            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(myUrls));
+            updateUI();
         }
 
         function toggleModal(show) {
             const modal = document.getElementById('add-modal');
             modal.classList.toggle('hidden', !show);
             if(show) {
-                const nameEl = document.getElementById('new-name');
-                const urlEl = document.getElementById('new-url');
-                const errMsg = document.getElementById('url-error-msg');
-                
-                nameEl.value = '';
-                urlEl.value = '';
-                nameEl.classList.remove('input-error');
-                urlEl.classList.remove('input-error');
-                errMsg.classList.add('opacity-0');
-                
-                nameEl.focus();
-            }
-        }
-
-        function isValidURL(string) {
-            try {
-                const url = new URL(string);
-                return url.protocol === "http:" || url.protocol === "https:";
-            } catch (_) {
-                return false;  
+                document.getElementById('new-name').value = '';
+                document.getElementById('new-url').value = '';
+                document.getElementById('t-error-msg').classList.add('opacity-0');
             }
         }
 
         function confirmAdd() {
-            const nameEl = document.getElementById('new-name');
-            const urlEl = document.getElementById('new-url');
-            const errMsg = document.getElementById('url-error-msg');
-            
-            const name = nameEl.value.trim();
-            const url = urlEl.value.trim();
-            
-            let hasError = false;
-
-            if (!name) {
-                nameEl.classList.add('input-error');
-                hasError = true;
-            } else {
-                nameEl.classList.remove('input-error');
+            const name = document.getElementById('new-name').value.trim();
+            const url = document.getElementById('new-url').value.trim();
+            if(!name || !url.startsWith('http')) {
+                document.getElementById('t-error-msg').classList.remove('opacity-0');
+                return;
             }
-
-            if (!url || !isValidURL(url)) {
-                urlEl.classList.add('input-error');
-                errMsg.classList.remove('opacity-0');
-                hasError = true;
-            } else {
-                urlEl.classList.remove('input-error');
-                errMsg.classList.add('opacity-0');
-            }
-
-            if (hasError) return;
-            
             myUrls.push({ id: Date.now(), name, url });
             toggleModal(false);
             saveData();
@@ -318,19 +416,17 @@
         }
 
         function handleMainAction() {
-            if (myUrls.length > 0) {
-                myUrls.forEach(item => window.open(item.url, '_blank'));
-            }
+            myUrls.forEach(item => window.open(item.url, '_blank'));
         }
 
         function updateUI() {
             const mainActionWrapper = document.getElementById('main-action-wrapper');
-            const btnSub = document.getElementById('main-action-sub');
+            const multiSub = document.getElementById('t-multi-sub');
             if (myUrls.length === 0) {
                 mainActionWrapper.classList.add('hidden-important');
             } else {
                 mainActionWrapper.classList.remove('hidden-important');
-                btnSub.innerText = `${myUrls.length}個のリンクを一括`;
+                multiSub.innerText = `${myUrls.length} Channels`;
             }
             render();
         }
@@ -338,6 +434,7 @@
         function render() {
             const list = document.getElementById('url-list');
             const empty = document.getElementById('empty-state');
+            const t = i18n[currentLang] || i18n.en;
             
             if (myUrls.length === 0) {
                 list.classList.add('hidden');
@@ -345,48 +442,33 @@
             } else {
                 list.classList.remove('hidden');
                 empty.classList.add('hidden');
-                
                 list.innerHTML = myUrls.map(item => `
-                    <div class="group relative glass p-6 rounded-[2rem] premium-card flex flex-col justify-between">
+                    <div class="group glass p-6 rounded-[2rem] premium-card flex flex-col justify-between">
                         <div class="flex items-start justify-between mb-4">
-                            <div class="flex-1 min-w-0">
+                            <div class="flex-1 truncate">
                                 <h4 class="text-xl md:text-2xl font-black text-white group-hover:text-[#5865F2] transition-colors truncate drop-shadow-md">
                                     ${item.name}
                                 </h4>
                                 <div class="flex items-center mt-2">
                                     <div class="w-2 h-2 rounded-full bg-emerald-500 mr-2 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
-                                    <span class="text-[10px] text-indigo-200 font-bold tracking-widest uppercase opacity-80 truncate max-w-[80%] block">
-                                        LINK ACTIVE
-                                    </span>
+                                    <span class="text-[8px] text-indigo-200 font-bold tracking-widest uppercase opacity-70">ACTIVE</span>
                                 </div>
                             </div>
-                            <button onclick="removeUrl(${item.id})" class="text-gray-400 hover:text-red-500 p-2 transition-colors ml-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                            <button onclick="removeUrl(${item.id})" class="text-gray-500 hover:text-red-500 p-2 transition-colors ml-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
                         </div>
-                        
-                        <div class="flex gap-3 mt-4">
-                            <a href="${item.url}" target="_self" class="flex-[2] py-4 bg-[#5865F2] hover:bg-[#4752c4] rounded-xl text-xs font-black text-center transition-all duration-300 shadow-xl border border-white/10 text-white">
-                                今すぐ移動
+                        <div class="flex gap-3">
+                            <a href="${item.url}" target="_self" class="flex-[2] py-4 bg-[#5865F2] hover:bg-[#4752c4] rounded-xl text-xs font-black text-center transition-all shadow-xl text-white">
+                                ${t.moveNow}
                             </a>
-                            <button onclick="window.open('${item.url}', '_blank')" class="flex-1 py-4 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-tighter transition-all border border-white/10 text-white">
-                                別タブ
+                            <button onclick="window.open('${item.url}', '_blank')" class="flex-1 py-4 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase transition-all text-white">
+                                ${t.newTab}
                             </button>
                         </div>
                     </div>
                 `).join('');
             }
-        }
-
-        if (window.innerWidth > 1024) {
-            document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth - 0.5) * 30;
-                const y = (e.clientY / window.innerHeight - 0.5) * 30;
-                document.querySelectorAll('.orb').forEach((orb, i) => {
-                    const f = i === 0 ? 1 : -1.2;
-                    orb.style.transform = `translate(${x * f}px, ${y * f}px)`;
-                });
-            });
         }
 
         window.onload = loadData;
