@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ディスコウェブ | Advanced Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Noto+Sans+JP:wght@500;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #5865F2;
+            --bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.04);
+        }
+        body {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .main-gradient {
+            background: linear-gradient(135deg, #5865F2 0%, #8b5cf6 100%);
+        }
+        .glass {
+            background: var(--card-bg);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .btn-hover {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+        .orb {
+            position: fixed;
+            width: 70vw;
+            height: 70vw;
+            max-width: 700px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        iframe {
+            width: 100%;
+            height: 85vh;
+            border-radius: 20px;
+            background: #1e1f22;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="orb main-gradient top-[-10%] left-[-5%]"></div>
+    <div class="orb bg-blue-600 bottom-[-10%] right-[-5%]"></div>
 
+    <div class="max-w-7xl mx-auto px-6 py-10">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6 bg-white/5 p-8 rounded-[3rem] border border-white/5">
+            <div class="text-center md:text-left">
+                <div class="text-[10px] uppercase tracking-[0.4em] text-indigo-400 font-black mb-2">Smart Dashboard</div>
+                <h1 class="text-5xl md:text-6xl font-black tracking-tighter">
+                    ディスコ<span class="text-[#5865F2]">ウェブ</span>
+                </h1>
+            </div>
+            
+            <button onclick="launchAll()" class="main-gradient px-10 py-5 rounded-2xl font-black text-xl btn-hover shadow-2xl flex items-center group">
+                <span class="mr-3 group-hover:rotate-12 transition-transform">🚀</span> 一括起動
+            </button>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left: Sidebar Links -->
+            <div class="lg:col-span-3 space-y-6">
+                <h3 class="px-4 text-xs font-black text-gray-500 uppercase tracking-widest">Official Resources</h3>
+                
+                <div class="grid grid-cols-1 gap-3">
+                    <a href="https://disboard.org/ja" target="_blank" class="glass p-5 rounded-2xl flex items-center group hover:bg-white/10 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center mr-4 text-amber-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        </div>
+                        <span class="font-bold">DISBOARD</span>
+                    </a>
+                    
+                    <a href="https://discordstatus.com/" target="_blank" class="glass p-5 rounded-2xl flex items-center group hover:bg-white/10 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center mr-4 text-emerald-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <span class="
