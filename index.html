@@ -3,318 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ディスコウェブ | Discoweb Premium Dashboard</title>
     
-    <!-- SEO & Metadata -->
-    <meta name="description" content="Manage your Discord web channels efficiently. Multi-launch, easy access, and personalized dashboard for power users.">
-    <meta name="keywords" content="Discord, Web, Dashboard, Multi-launch, Productivity, ディスコード, ウェブ版, 一括起動">
-    <meta name="author" content="Discoweb Team">
+    <!-- SEO Meta Tags -->
+    <title>DISCOWEB | Optimized Discord Dashboard</title>
+    <meta name="description" content="DISCOWEBは、あなたのDiscord体験を美しく効率的に整理するためのパーソナルダッシュボードです。複数のチャンネルを一括管理し、スムーズなコミュニティ運営をサポートします。">
+    <meta name="keywords" content="Discord, Dashboard, Management, Tool, Community, Productivity">
+    <meta name="author" content="DiscoWeb Project">
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / SNS -->
     <meta property="og:type" content="website">
-    <meta property="og:id" content="discoweb-premium">
-    <meta id="og-title" property="og:title" content="ディスコウェブ | Premium Dashboard">
-    <meta id="og-desc" property="og:description" content="Discordのウェブ版をより便利に。一括起動やリンク保存が可能なプレミアムダッシュボード。">
-    
+    <meta property="og:title" content="DISCOWEB | Digital Sanctuary for Discord">
+    <meta property="og:description" content="Your personal registry for a better Discord life. Manage all channels in one sleek interface.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?auto=format&fit=crop&q=80&w=1200">
+    <meta name="twitter:card" content="summary_large_image">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Noto+Sans+JP:wght@500;900&family=Noto+Sans+SC:wght@500;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Noto+Serif+JP:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Ad Scripts -->
-    <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script>
-    <script async type="application/javascript" src="https://a.pemsrv.com/ad-provider.js"></script>
-
     <style>
         :root {
-            --accent: #5865F2;
-            --bg: #050508;
-            --card-bg: rgba(20, 20, 25, 0.85);
-            --neon-glow: 0 0 30px rgba(88, 101, 242, 0.4);
+            --discord: #5865F2;
+            --discord-light: #7289da;
+            --bg: #f3f4f9;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-color: rgba(0, 0, 0, 0.05);
         }
+        
         body {
-            font-family: 'Outfit', 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Noto Serif JP', serif;
             background-color: var(--bg);
-            color: #ffffff;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-            padding-bottom: 40px;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 120px;
         }
-        .main-gradient {
-            background: linear-gradient(135deg, #5865F2 0%, #a855f7 100%);
+
+        .serif-heading {
+            font-family: 'Playfair Display', 'Noto Serif JP', serif;
+            letter-spacing: -0.01em;
         }
-        .glass {
+
+        .glass-card {
             background: var(--card-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border: 2px solid transparent;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .premium-card {
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            border-left: 5px solid transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 50px -20px rgba(88, 101, 242, 0.2);
+            border-color: var(--discord);
         }
-        .premium-card:hover {
-            transform: translateY(-5px);
-            border-left-color: var(--accent);
-            background: rgba(30, 30, 40, 0.95);
-            box-shadow: var(--neon-glow);
+
+        .hero-main-btn {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .orb {
-            position: fixed;
-            width: 80vw; height: 80vw;
-            max-width: 800px;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: -1;
-            opacity: 0.15;
-            pointer-events: none;
-            animation: pulse 12s infinite alternate;
+        .hero-main-btn:hover {
+            transform: scale(1.02);
+            letter-spacing: 0.15em;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.1; }
-            100% { transform: scale(1.15); opacity: 0.2; }
+
+        .sticky-footer {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
-        .hidden-important { display: none !important; }
-        .input-error {
-            border-color: #ef4444 !important;
-            background-color: rgba(239, 68, 68, 0.05) !important;
-        }
-        .ad-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-        .lang-btn {
-            padding: 4px 10px;
-            border-radius: 10px;
+
+        .nav-link {
             font-size: 11px;
-            font-weight: 900;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.03);
-            color: rgba(255,255,255,0.5);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-main);
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s;
         }
-        .lang-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--discord);
+            transition: width 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--discord);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Language Toggle Active State */
+        .lang-active {
+            background-color: white !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            color: var(--discord);
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <!-- Interstitial Ad (Page Load) -->
-    <ins class="eas6a97888e35" data-zoneid="5839402"></ins>
-    <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+<body class="selection:bg-[#5865F2] selection:text-white">
 
-    <div class="orb main-gradient top-[-20%] left-[-10%]"></div>
-    <div class="orb bg-indigo-900 bottom-[-20%] right-[-10%]" style="animation-delay: -6s;"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 md:py-8">
-        
-        <!-- Language Switcher Bar -->
-        <div class="flex justify-end gap-2 mb-6">
-            <button onclick="setLanguage('ja')" id="lang-ja" class="lang-btn">日本語</button>
-            <button onclick="setLanguage('en')" id="lang-en" class="lang-btn">EN</button>
-            <button onclick="setLanguage('zh')" id="lang-zh" class="lang-btn">中文</button>
-            <button onclick="setLanguage('es')" id="lang-es" class="lang-btn">ES</button>
-        </div>
-
-        <!-- Header -->
-        <header class="glass rounded-[2.5rem] p-6 md:p-10 mb-8 flex flex-col lg:flex-row items-center justify-between gap-8 border-t border-white/10">
-            <div class="text-center lg:text-left">
-                <span id="t-premium" class="inline-block px-4 py-1 rounded-full bg-[#5865F2]/20 text-[#5865F2] text-[10px] font-black tracking-[0.3em] mb-3 uppercase">PREMIUM DASHBOARD</span>
-                <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-none">
-                    <span id="t-brand-1">ディスコ</span><span id="t-brand-2" class="text-[#5865F2]">ウェブ</span>
+    <!-- Global Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-black/5 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-8">
+                <h1 class="serif-heading text-3xl font-black italic tracking-tighter cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <span class="text-black">Disco</span><span class="text-[#5865F2]">web</span>
                 </h1>
+                
+                <nav class="flex items-center gap-8 border-l border-slate-200 pl-8">
+                    <a href="https://discordstatus.com/" target="_blank" class="nav-link">Status</a>
+                    <a href="https://disboard.org/" target="_blank" class="nav-link">DISBOARD</a>
+                    <a href="https://support.discord.com/" target="_blank" class="nav-link">Support</a>
+                </nav>
             </div>
             
-            <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-4">
-                <a href="https://discord.com/app" target="_self" class="flex-1 flex items-center justify-center gap-4 bg-white/5 hover:bg-white/10 px-8 py-5 rounded-3xl border border-white/10 transition-all font-bold group text-center">
-                    <span class="text-2xl group-hover:scale-110 transition-transform">🌐</span>
-                    <div class="text-left">
-                        <div class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Official</div>
-                        <div id="t-open-web" class="text-lg leading-none">ウェブ版を開く</div>
+            <div class="flex items-center gap-6">
+                <div id="header-action-container"></div>
+                
+                <div class="flex bg-slate-100 p-1 rounded-full gap-1">
+                    <button onclick="setLanguage('ja')" id="lang-ja" class="px-4 py-1.5 rounded-full text-[10px] font-bold transition-all">JP</button>
+                    <button onclick="setLanguage('en')" id="lang-en" class="px-4 py-1.5 rounded-full text-[10px] font-bold transition-all">EN</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-6 py-12 md:py-20"> 
+        <!-- Hero Section -->
+        <section class="text-center mb-32 space-y-12">
+            <div class="max-w-3xl mx-auto space-y-6">
+                <span class="text-[10px] font-black tracking-[0.5em] text-[#5865F2] uppercase block">Seamless Connection</span>
+                <h2 class="serif-heading text-6xl md:text-8xl font-black leading-tight text-slate-900">
+                    Your Digital <br><span class="italic text-slate-400">Sanctuary.</span>
+                </h2>
+            </div>
+
+            <div class="flex flex-col items-center gap-8">
+                <a href="https://discord.com/app" target="_self" class="hero-main-btn group relative inline-flex items-center justify-center">
+                    <div class="absolute inset-0 bg-[#5865F2] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="relative bg-black text-white px-16 py-8 rounded-2xl">
+                        <span id="t-open-web-massive" class="text-2xl md:text-4xl font-black uppercase tracking-widest">ウェブ版を開く</span>
+                        <p class="text-[10px] mt-2 text-white/40 tracking-[0.3em] font-bold uppercase">Launch Discord Web App</p>
                     </div>
                 </a>
-                <button id="main-action-wrapper" onclick="handleMainAction()" class="flex-1 flex items-center justify-center gap-4 main-gradient px-10 py-5 rounded-3xl font-black shadow-2xl transition-all hover:scale-[1.02] active:scale-95 group hidden-important">
-                    <span class="text-2xl group-hover:rotate-12 transition-transform">🚀</span>
-                    <div class="text-left">
-                        <div id="t-multi-sub" class="text-[10px] text-white/70 font-black uppercase tracking-widest">Multi-Launch</div>
-                        <div id="t-multi-btn" class="text-lg leading-none">一括起動</div>
-                    </div>
+                
+                <p id="t-hero-sub" class="max-w-lg mx-auto text-slate-500 text-sm leading-relaxed">
+                    Discordは現代における「焚き火」のような場所。このレジストリを使用して、あなたのコミュニティ運営をさらに美しく、効率的に。
+                </p>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="space-y-16">
+            <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
+ <ins class="eas6a97888e20" data-zoneid="5839654"></ins> 
+ <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-10">
+                <div class="pl-6 border-l-4 border-[#5865F2]">
+                    <span class="text-[10px] font-black tracking-widest text-slate-400 uppercase mb-2 block">Curation Journal</span>
+                    <h2 class="serif-heading text-5xl font-black italic text-slate-900">
+                        <span id="t-mylist">Personal Registry</span>
+                    </h2>
+                </div>
+                <button onclick="toggleModal(true)" id="t-add-btn" class="bg-[#5865F2] text-white px-10 py-5 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#4752c4] shadow-xl shadow-blue-500/20 transition-all active:scale-95">
+                    + Add New Channel
                 </button>
             </div>
-        </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- Left Sidebar -->
-            <aside class="lg:col-span-4 xl:col-span-3 space-y-6">
-                <nav class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3 text-center lg:text-left">
-                    <a href="https://disboard.org/ja" target="_blank" class="glass p-5 rounded-2xl flex items-center premium-card border-none">
-                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mr-4 text-amber-500 border border-amber-500/20">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                        </div>
-                        <div class="font-bold text-sm uppercase">Disboard</div>
-                    </a>
-                    <a href="https://discordstatus.com/" target="_blank" class="glass p-5 rounded-2xl flex items-center premium-card border-none">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mr-4 text-emerald-500 border border-emerald-500/20">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
-                        <div id="t-status" class="font-bold text-sm">稼働状況</div>
-                    </a>
-                    <a href="https://support.discord.com/" target="_blank" class="glass p-5 rounded-2xl flex items-center premium-card border-none">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center mr-4 text-sky-500 border border-sky-500/20">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
-                        <div id="t-support" class="font-bold text-sm">サポート</div>
-                    </a>
-                </nav>
+            <div id="url-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
 
-   
-            </aside>
-
-            <!-- Main Content Area -->
-            <main class="lg:col-span-8 xl:col-span-9">
-                <div class="glass rounded-[3rem] p-6 md:p-10 min-h-[600px] flex flex-col border border-white/10">
-                    <div class="flex flex-col sm:flex-row items-center justify-between mb-10 gap-6 text-center sm:text-left">
-                        <div>
-                            <h2 id="t-mylist" class="text-3xl font-black">マイ・リスト</h2>
-                            <p id="t-mylist-sub" class="text-[10px] text-[#5865F2] font-black tracking-[0.2em] mt-1 uppercase">YOUR SAVED CHANNELS</p>
-                        </div>
-                        <button onclick="toggleModal(true)" id="t-add-btn" class="w-full sm:w-auto bg-white text-black px-10 py-4 rounded-2xl font-black text-lg transition-all hover:bg-[#5865F2] hover:text-white shadow-xl active:scale-95">
-                            ＋ リンクを追加
-                        </button>
-                    </div>
-                    
-                    <div id="url-list" class="grid grid-cols-1 xl:grid-cols-2 gap-5"></div>
-
-                    <div id="empty-state" class="hidden flex-1 flex flex-col items-center justify-center py-20 bg-white/[0.02] rounded-[2.5rem] border-2 border-dashed border-white/5 text-center px-6">
-                        <div class="text-5xl mb-6 opacity-30">📁</div>
-                        <h3 id="t-empty-msg" class="text-lg font-bold text-gray-400">リストは空です</h3>
-                    </div>
+            <div id="empty-state" class="hidden py-48 text-center rounded-[40px] bg-white border-2 border-dashed border-slate-200">
+                <div class="max-w-xs mx-auto space-y-6">
+                    <p id="t-empty-msg" class="text-slate-300 font-black italic text-2xl serif-heading">NO REGISTRY FOUND</p>
+                    <button onclick="toggleModal(true)" id="t-empty-action" class="text-[#5865F2] font-bold text-sm underline underline-offset-8 decoration-2">記録を最初に追加する</button>
                 </div>
-            </main>
+            </div>
+        </section>
+
+        <!-- Editorial Content Area -->
+        <section id="editorial" class="mt-40 pt-20 border-t border-slate-200 grid grid-cols-1 lg:grid-cols-3 gap-20">
+            <div class="space-y-8">
+                <h3 id="t-editorial-title" class="serif-heading text-3xl font-black italic text-slate-900 leading-snug">The Architecture <br>of Community.</h3>
+                <p id="t-editorial-sub" class="text-sm text-slate-500 leading-loose">
+                    サーバーを育てることは庭を整えることと同じです。適切な導線を引き、人々が自然と集まれる場所をデザインすること。
+                </p>
+            </div>
+            <div id="t-tips-content" class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10 text-xs text-slate-400 leading-loose uppercase tracking-widest"></div>
+        </section>
+    </main>
+
+    <footer class="sticky-footer fixed bottom-0 left-0 right-0 z-50 py-6 px-6 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-white border border-slate-200 p-4 rounded-xl hover:bg-slate-50 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+                </button>
+                <div class="hidden sm:block">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">DiscoWeb Dash v1.3</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="toggleModal(true)" id="t-quick-add" class="bg-black text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-95 shadow-lg">
+                    Quick Add
+                </button>
+                <div id="footer-main-action"></div>
+            </div>
         </div>
+    </footer>
 
-        <!-- Horizontal Ad Area (Bottom) -->
-        <div class="mt-12 ad-container glass rounded-[2rem] p-4 border border-white/5 min-h-[90px]">
-            <ins class="eas6a97888e31" data-zoneid="5839408"></ins>
-            <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
-        </div>
-
-        <footer class="mt-8 py-10 border-t border-white/5 text-center">
-            <p class="text-[10px] text-gray-500 tracking-wider font-bold">
-                &copy; 2026 DISCOWEB PREMIUM - PERSISTENT LOCAL STORAGE ENABLED
-            </p>
-        </footer>
-    </div>
-
-    <!-- Modal -->
-    <div id="add-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
-        <div class="absolute inset-0 bg-black/85 backdrop-blur-xl" onclick="toggleModal(false)"></div>
-        <div class="glass relative w-full max-w-lg p-8 md:p-10 rounded-[3rem] border border-white/20 animate-in zoom-in-95 duration-200">
-            <h3 id="t-modal-title" class="text-2xl font-black mb-8">リンクの追加</h3>
-            <div class="space-y-5">
-                <div class="space-y-2">
-                    <label id="t-label-name" class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2">表示名</label>
-                    <input type="text" id="new-name" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#5865F2] transition-all font-bold text-white">
+    <div id="add-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-md" onclick="toggleModal(false)"></div>
+        <div class="bg-white relative w-full max-w-xl p-10 md:p-16 rounded-[40px] shadow-2xl">
+            <div class="mb-12">
+                <span class="text-[10px] font-black text-[#5865F2] uppercase tracking-[0.4em] mb-2 block">New Registry</span>
+                <h3 id="t-modal-title" class="serif-heading text-4xl italic text-slate-900">記録を追加</h3>
+            </div>
+            <div class="space-y-10">
+                <div>
+                    <label id="t-label-name" class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Channel Name</label>
+                    <input type="text" id="new-name" placeholder="Server / Channel" class="w-full bg-slate-50 border-b-2 border-slate-100 p-4 focus:outline-none focus:border-[#5865F2] transition-all text-xl font-bold rounded-t-2xl">
                 </div>
-                <div class="space-y-2">
-                    <label id="t-label-url" class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2">URL (httpsのみ)</label>
-                    <input type="text" id="new-url" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#5865F2] transition-all font-mono text-xs text-indigo-300">
-                    <p id="t-error-msg" class="text-[10px] text-red-500 font-bold ml-2 opacity-0 transition-opacity">正しいURLを入力してください</p>
+                <div>
+                    <label id="t-label-url" class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">URL Endpoint</label>
+                    <input type="text" id="new-url" placeholder="https://discord.com/channels/..." class="w-full bg-slate-50 border-b-2 border-slate-100 p-4 focus:outline-none focus:border-[#5865F2] transition-all font-mono text-sm text-[#5865F2] rounded-t-2xl">
+                    <p id="t-error-msg" class="text-[10px] text-red-500 font-bold mt-4 opacity-0 uppercase tracking-widest">URL MUST START WITH HTTP</p>
                 </div>
-                <div class="pt-6 flex gap-3">
-                    <button onclick="toggleModal(false)" id="t-cancel" class="flex-1 py-4 rounded-2xl font-bold bg-white/5 hover:bg-white/10 transition-all">戻る</button>
-                    <button onclick="confirmAdd()" id="t-save" class="flex-[2] py-4 rounded-2xl font-black main-gradient text-white shadow-xl hover:scale-[1.02] active:scale-95 transition-all">保存</button>
+                <div class="pt-6 flex flex-col gap-6">
+                    <button onclick="confirmAdd()" id="t-save" class="w-full bg-[#5865F2] text-white py-6 rounded-2xl font-black uppercase tracking-widest hover:bg-[#4752c4] shadow-xl shadow-blue-500/20 transition-all">Save to Registry</button>
+                    <button onclick="toggleModal(false)" id="t-cancel" class="text-[10px] font-black text-slate-300 uppercase tracking-widest hover:text-slate-900 transition-all text-center">Discard</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const STORAGE_KEY = 'discoweb_v6_premium_data';
+        const STORAGE_KEY = 'discoweb_v11_ux_revamp';
         const LANG_KEY = 'discoweb_lang';
         let myUrls = [];
         let currentLang = 'ja';
 
         const i18n = {
             ja: {
-                brand1: "ディスコ", brand2: "ウェブ",
-                premium: "プレミアム・ダッシュボード",
                 openWeb: "ウェブ版を開く",
-                multiBtn: "一括起動",
-                status: "稼働状況", support: "サポート",
-                mylist: "マイ・リスト", mylistSub: "保存したチャンネル",
-                addBtn: "＋ リンクを追加", empty: "リストは空です",
-                modalTitle: "リンクの追加", labelName: "表示名", labelUrl: "URL (httpsのみ)",
-                error: "正しいURLを入力してください", cancel: "戻る", save: "保存して追加",
-                moveNow: "今すぐ移動", newTab: "別タブ",
-                ogDesc: "Discordのウェブ版をより便利に。一括起動やリンク保存が可能なプレミアムダッシュボード。",
+                multiBtn: "一括同時起動",
+                mylist: "レジストリ一覧",
+                empty: "登録されている情報がありません",
+                emptyAction: "記録を最初に追加する",
+                modalTitle: "リストに登録する", labelName: "表示名", labelUrl: "URLエンドポイント",
+                error: "URLの形式が正しくありません", cancel: "破棄する", save: "保存して確定",
+                moveNow: "ENTER", newTab: "NEW TAB",
+                heroSub: "Discordは現代における「焚き火」のような場所。このレジストリを使用して、あなたのコミュニティ運営をさらに美しく、効率的に。",
+                quickAdd: "クイック追加", addBtn: "+ チャンネル追加",
+                editorialTitle: "コミュニティの設計。",
+                editorialSub: "サーバーを育てることは庭を整えることと同じです。適切な導線を引き、人々が自然と集まれる場所をデザインすること。このダッシュボードはそのための最初のツールです。",
                 tips: [
-                    "<strong class='text-white'>追加:</strong> 「リンクをコピー」して保存。",
-                    "<strong class='text-white'>一括:</strong> 全タブを同時に展開。",
-                    "<strong class='text-white'>移動:</strong> タップで瞬時にアクセス。"
+                    "<strong>STRUCTURE:</strong> 散らばったチャンネルを一つのダッシュボードに。視覚的なノイズを減らし、集中できる環境を整えます。",
+                    "<strong>AUTOMATION:</strong> ワンクリックですべての必要なタブをバックグラウンドで準備。あなたのルーチンを加速させます。",
+                    "<strong>CURATION:</strong> 不要になったリンクは定期的に整理しましょう。デジタルの整理は心の整理に繋がります。"
                 ]
             },
             en: {
-                brand1: "Disco", brand2: "Web",
-                premium: "PREMIUM DASHBOARD",
-                openWeb: "Open Web Version",
-                multiBtn: "Launch All",
-                status: "Server Status", support: "Support",
-                mylist: "My List", mylistSub: "SAVED CHANNELS",
-                addBtn: "+ Add Link", empty: "Your list is empty",
-                modalTitle: "Add New Link", labelName: "Display Name", labelUrl: "URL (https only)",
-                error: "Please enter a valid URL", cancel: "Cancel", save: "Save Link",
-                moveNow: "Go Now", newTab: "Tab",
-                ogDesc: "Efficiently manage Discord on the web. Save links and launch all at once with this premium dashboard.",
+                openWeb: "Open Web App",
+                multiBtn: "Batch Launch",
+                mylist: "My Registry",
+                empty: "Registry is currently empty",
+                emptyAction: "Add your first registry",
+                modalTitle: "Add Entry", labelName: "Label Name", labelUrl: "Link URL",
+                error: "Invalid URL format", cancel: "Discard", save: "Commit to Registry",
+                moveNow: "ENTER", newTab: "NEW TAB",
+                heroSub: "Discord is like a modern-day campfire. Use this registry to make your community management more beautiful and efficient.",
+                quickAdd: "Quick Add", addBtn: "+ Add Channel",
+                editorialTitle: "Architecture of Community.",
+                editorialSub: "Growing a server is like tending a garden. Designing paths where people naturally gather. This dashboard is your first tool for that.",
                 tips: [
-                    "<strong class='text-white'>Add:</strong> Paste your Discord URL and save.",
-                    "<strong class='text-white'>Multi:</strong> Launch all tabs at once.",
-                    "<strong class='text-white'>Access:</strong> Click cards to jump directly."
-                ]
-            },
-            zh: {
-                brand1: "迪斯科", brand2: "网页",
-                premium: "高级仪表板",
-                openWeb: "打开网页版",
-                multiBtn: "全部启动",
-                status: "服务状态", support: "支持",
-                mylist: "我的列表", mylistSub: "已保存的频道",
-                addBtn: "+ 添加链接", empty: "列表为空",
-                modalTitle: "添加新链接", labelName: "显示名称", labelUrl: "URL (仅限https)",
-                error: "请输入有效的URL", cancel: "取消", save: "保存链接",
-                moveNow: "立即前往", newTab: "新标签",
-                ogDesc: "高效管理Discord网页版。保存频道链接并实现一括启动的高级工具。",
-                tips: [
-                    "<strong class='text-white'>添加:</strong> 复制链接并点击添加。",
-                    "<strong class='text-white'>批量:</strong> 一次打开所有标签。",
-                    "<strong class='text-white'>导航:</strong> 点击卡片快速访问。"
-                ]
-            },
-            es: {
-                brand1: "Disco", brand2: "Web",
-                premium: "PANEL PREMIUM",
-                openWeb: "Abrir Versión Web",
-                multiBtn: "Lanzar Todo",
-                status: "Estado", support: "Soporte",
-                mylist: "Mi Lista", mylistSub: "CANALES GUARDADOS",
-                addBtn: "+ Añadir Link", empty: "Tu lista está vacía",
-                modalTitle: "Añadir Nuevo Link", labelName: "Nombre", labelUrl: "URL (solo https)",
-                error: "Por favor ingrese una URL válida", cancel: "Volver", save: "Guardar",
-                moveNow: "Ir Ahora", newTab: "Pestaña",
-                ogDesc: "Gestiona Discord en la web de forma eficiente. Guarda tus canales y lánzalos todos a la vez.",
-                tips: [
-                    "<strong class='text-white'>Añadir:</strong> Pega el link y guarda.",
-                    "<strong class='text-white'>Multi:</strong> Abre todas las pestañas.",
-                    "<strong class='text-white'>Mover:</strong> Toca para acceder rápido."
+                    "<strong>STRUCTURE:</strong> Organize scattered channels into one dashboard. Reduce visual noise and stay focused.",
+                    "<strong>AUTOMATION:</strong> Prepare all necessary tabs in the background with one click. Accelerate your routine.",
+                    "<strong>CURATION:</strong> Regularly clean up links you no longer need. Digital decluttering leads to peace of mind."
                 ]
             }
         };
@@ -322,53 +295,50 @@
         function setLanguage(lang) {
             currentLang = lang;
             localStorage.setItem(LANG_KEY, lang);
-            
             const t = i18n[lang] || i18n.en;
             
-            // Dynamic Meta Update for SEO
-            document.title = `${t.brand1}${t.brand2} | Premium Dashboard`;
-            document.getElementById('og-title').setAttribute('content', document.title);
-            document.getElementById('og-desc').setAttribute('content', t.ogDesc);
-
-            // Element Updates
-            document.getElementById('t-brand-1').innerText = t.brand1;
-            document.getElementById('t-brand-2').innerText = t.brand2;
-            document.getElementById('t-premium').innerText = t.premium;
-            document.getElementById('t-open-web').innerText = t.openWeb;
-            document.getElementById('t-multi-btn').innerText = t.multiBtn;
-            document.getElementById('t-status').innerText = t.status;
-            document.getElementById('t-support').innerText = t.support;
+            // Text Content Updates
+            document.getElementById('t-open-web-massive').innerText = t.openWeb;
+            document.getElementById('t-hero-sub').innerText = t.heroSub;
             document.getElementById('t-mylist').innerText = t.mylist;
-            document.getElementById('t-mylist-sub').innerText = t.mylistSub;
             document.getElementById('t-add-btn').innerText = t.addBtn;
             document.getElementById('t-empty-msg').innerText = t.empty;
+            document.getElementById('t-empty-action').innerText = t.emptyAction;
+            document.getElementById('t-quick-add').innerText = t.quickAdd;
             document.getElementById('t-modal-title').innerText = t.modalTitle;
             document.getElementById('t-label-name').innerText = t.labelName;
             document.getElementById('t-label-url').innerText = t.labelUrl;
             document.getElementById('t-error-msg').innerText = t.error;
             document.getElementById('t-cancel').innerText = t.cancel;
             document.getElementById('t-save').innerText = t.save;
-            document.getElementById('t-tips-content').innerHTML = t.tips.map(p => `<p>${p}</p>`).join('');
+            document.getElementById('t-editorial-title').innerHTML = t.editorialTitle;
+            document.getElementById('t-editorial-sub').innerText = t.editorialSub;
+            document.getElementById('t-tips-content').innerHTML = t.tips.map(p => `<div class="p-8 bg-white border border-slate-100 rounded-3xl"><p>${p}</p></div>`).join('');
 
-            // Active Switcher UI
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`lang-${lang}`).classList.add('active');
+            // UI Button Highlighting
+            document.getElementById('lang-ja').className = `px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${lang === 'ja' ? 'lang-active' : ''}`;
+            document.getElementById('lang-en').className = `px-4 py-1.5 rounded-full text-[10px] font-bold transition-all ${lang === 'en' ? 'lang-active' : ''}`;
 
             updateUI();
         }
 
+        function detectLanguage() {
+            // Check manual override in storage first
+            const savedLang = localStorage.getItem(LANG_KEY);
+            if (savedLang) return savedLang;
+
+            // Browser language detection
+            const browserLang = navigator.language || navigator.userLanguage;
+            return browserLang.startsWith('ja') ? 'ja' : 'en';
+        }
+
         function loadData() {
             try {
-                const savedLang = localStorage.getItem(LANG_KEY);
-                const browserLang = navigator.language.split('-')[0];
-                const initialLang = savedLang || (i18n[browserLang] ? browserLang : 'ja');
-                setLanguage(initialLang);
-
+                const detected = detectLanguage();
+                setLanguage(detected);
                 const data = localStorage.getItem(STORAGE_KEY);
                 myUrls = data ? JSON.parse(data) : [];
-            } catch (e) {
-                myUrls = [];
-            }
+            } catch (e) { myUrls = []; }
             updateUI();
         }
 
@@ -405,18 +375,30 @@
         }
 
         function handleMainAction() {
-            myUrls.forEach(item => window.open(item.url, '_blank'));
+            if(myUrls.length === 0) {
+                window.open('https://discord.com/app', '_self');
+            } else {
+                myUrls.forEach(item => window.open(item.url, '_blank'));
+            }
         }
 
         function updateUI() {
-            const mainActionWrapper = document.getElementById('main-action-wrapper');
-            const multiSub = document.getElementById('t-multi-sub');
-            if (myUrls.length === 0) {
-                mainActionWrapper.classList.add('hidden-important');
+            const t = i18n[currentLang] || i18n.en;
+            
+            const headerContainer = document.getElementById('header-action-container');
+            if(myUrls.length > 0) {
+                headerContainer.innerHTML = `<button onclick="handleMainAction()" class="bg-[#5865F2] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#4752c4] transition-all shadow-md">${t.multiBtn}</button>`;
             } else {
-                mainActionWrapper.classList.remove('hidden-important');
-                multiSub.innerText = `${myUrls.length} Channels`;
+                headerContainer.innerHTML = `<a href="https://discord.com/app" class="border border-slate-200 text-slate-800 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:border-black transition-all">${t.openWeb}</a>`;
             }
+
+            const footerContainer = document.getElementById('footer-main-action');
+            if(myUrls.length > 0) {
+                footerContainer.innerHTML = `<button onclick="handleMainAction()" class="bg-[#5865F2] text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#4752c4] shadow-lg transition-all active:scale-95">${t.multiBtn}</button>`;
+            } else {
+                footerContainer.innerHTML = `<a href="https://discord.com/app" class="bg-slate-100 text-slate-400 px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all inline-block">${t.openWeb}</a>`;
+            }
+
             render();
         }
 
@@ -431,27 +413,24 @@
             } else {
                 list.classList.remove('hidden');
                 empty.classList.add('hidden');
-                list.innerHTML = myUrls.map(item => `
-                    <div class="group glass p-6 rounded-[2rem] premium-card flex flex-col justify-between">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="flex-1 truncate">
-                                <h4 class="text-xl md:text-2xl font-black text-white group-hover:text-[#5865F2] transition-colors truncate drop-shadow-md">
+                list.innerHTML = myUrls.map((item, idx) => `
+                    <div class="glass-card bg-white p-12 rounded-[40px] flex flex-col justify-between group">
+                        <div class="flex justify-between items-start mb-16">
+                            <div class="flex-1">
+                                <span class="text-[9px] font-black text-[#5865F2] mb-4 block tracking-[0.3em] uppercase">LINK 0${idx+1}</span>
+                                <h4 class="serif-heading text-4xl font-black text-slate-900 leading-[1.2] italic group-hover:text-[#5865F2] transition-colors">
                                     ${item.name}
                                 </h4>
-                                <div class="flex items-center mt-2">
-                                    <div class="w-2 h-2 rounded-full bg-emerald-500 mr-2 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
-                                    <span class="text-[8px] text-indigo-200 font-bold tracking-widest uppercase opacity-70">ACTIVE</span>
-                                </div>
                             </div>
-                            <button onclick="removeUrl(${item.id})" class="text-gray-500 hover:text-red-500 p-2 transition-colors ml-2">
+                            <button onclick="removeUrl(${item.id})" class="text-slate-200 hover:text-red-500 transition-colors p-3 bg-slate-50 rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="${item.url}" target="_self" class="flex-[2] py-4 bg-[#5865F2] hover:bg-[#4752c4] rounded-xl text-xs font-black text-center transition-all shadow-xl text-white">
+                        <div class="space-y-3">
+                            <a href="${item.url}" target="_self" class="block w-full bg-black text-white text-center py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-[#5865F2] transition-all shadow-lg">
                                 ${t.moveNow}
                             </a>
-                            <button onclick="window.open('${item.url}', '_blank')" class="flex-1 py-4 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase transition-all text-white">
+                            <button onclick="window.open('${item.url}', '_blank')" class="block w-full bg-slate-50 text-slate-400 text-center py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-100 hover:text-slate-900 transition-all">
                                 ${t.newTab}
                             </button>
                         </div>
@@ -462,8 +441,15 @@
 
         window.onload = loadData;
     </script>
-    <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
+ <script async type="application/javascript" src="https://a.pemsrv.com/ad-provider.js"></script> 
+ <ins class="eas6a97888e35" data-zoneid="5839402"></ins> 
+ <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+ <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
  <ins class="eas6a97888e31" data-zoneid="5839408"></ins> 
  <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
-</body>
+  <script async type="application/javascript" src="https://a.magsrv.com/ad-provider.js"></script> 
+ <ins class="eas6a97888e20" data-zoneid="5839644"></ins> 
+ <script>(AdProvider = window.AdProvider || []).push({"serve": {}});</script>
+       
+    </body>
 </html>
